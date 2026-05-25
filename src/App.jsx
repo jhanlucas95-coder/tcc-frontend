@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 // ==========================================
 // 1. Usa localhost para probar en tu compu.
 // 2. Cuando subas a Render, descomenta la línea de abajo y pon tu enlace real.
-const API_URL = 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 // const API_URL = 'https://tu-backend-tcc.onrender.com';
 
 const socket = io(API_URL);
