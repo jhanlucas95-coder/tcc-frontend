@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-// ==========================================
-// RUTA DINÁMICA PARA EL DESPLIEGUE
-// ==========================================
-// 1. Usa localhost para probar en tu compu.
-// 2. Cuando subas a Render, descomenta la línea de abajo y pon tu enlace real.
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-// const API_URL = 'https://tu-backend-tcc.onrender.com';
 
 const socket = io(API_URL);
 
@@ -43,7 +37,6 @@ function App() {
         'Authorization': `Bearer ${token}`
     };
 
-    // --- FUNCIONES DE CARGA DE DATOS ---
     const cargarDatosProyecto = () => {
         fetch(`${API_URL}/api/proyecto`, { headers: authHeaders })
             .then(res => res.json())
@@ -97,7 +90,6 @@ function App() {
         };
     }, [token]);
 
-    // --- MANEJADORES DEL CRONOGRAMA ---
     const cambiarObjetivo = async () => {
         const nuevoTitulo = prompt("Introduce el nuevo objetivo general del proyecto:", proyecto?.titulo);
         if (nuevoTitulo && nuevoTitulo.trim() !== "") {
@@ -164,7 +156,6 @@ function App() {
         }
     };
 
-    // --- MANEJADOR DE ARCHIVOS ---
     const handleFileUpload = async (e) => {
         e.preventDefault();
         if (!archivoSeleccionado) return alert("Por favor, selecciona un archivo.");
@@ -193,7 +184,6 @@ function App() {
         }
     };
 
-    // NUEVA FUNCIÓN: ELIMINAR DOCUMENTO
     const eliminarDocumento = async (id) => {
         if (!window.confirm("¿Seguro que deseas eliminar este documento permanentemente?")) return;
         try {
@@ -208,7 +198,6 @@ function App() {
         }
     };
 
-    // --- MANEJADOR DE CHAT PÚBLICO Y PRIVADO ---
     const enviarMensaje = (e) => {
         e.preventDefault();
         if (!mensaje.trim()) return;
@@ -225,7 +214,6 @@ function App() {
         setMensaje('');
     };
 
-    // --- AUTENTICACIÓN ---
     const manejarLogin = async (e) => {
         e.preventDefault();
         setErrorAuth('');
